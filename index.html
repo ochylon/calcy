@@ -1,6 +1,635 @@
-
+<!DOCTYPE html>
 <html>
-  <body>
-    123
-  </body>
+<head>
+<title>Database</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+      rel="stylesheet">
+
+<style>
+html{
+	font-family: Arial;
+	background: #222;
+	padding-top: 30px;
+}
+
+body{
+	line-break: 883px;
+}
+
+@font-face {
+      font-family: 'Material Icons';
+      font-display: block;
+    }
+
+
+div{
+border: .8px black solid;
+padding: 10px;
+background: linear-gradient(45deg,#444,#333);
+color: #ddd;
+}
+
+.popup-container{
+	background: rgba(0,0,0,.6);
+	position: fixed;
+	top: 0; left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #ddd;
+}
+
+.popup-div{
+	background: #555;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.2rem;
+	padding: 0;
+	background: linear-gradient(45deg,#222,#111);
+	transition: all .1s;
+}
+
+.popup-div input{
+	outline: none;
+	margin-bottom: 3px;
+	background: #555;
+	padding: 5px 2px;
+	font-size: 1.2rem;
+	padding: 10px;
+	font-weight: bold;
+	border: none;
+	color: #ddd;
+	border-radius: 5px;
+}
+
+.show{
+	visibility: hidden;
+}
+
+.cont h2, p{
+	margin: 1px;
+}
+
+button{
+	background-color: black;
+	border: .9px solid #aaa;
+	color: #ddd;
+	padding: 6px 10px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 1rem;
+	display: inline-block;
+	outline: none;
+	cursor: pointer;
+	border-radius: 3px;
+	font-weight: 700;
+	-webkit-tap-highlight-color: transparent;
+}
+
+button:hover{
+	background: white;
+	color: black;
+}
+
+#popup span{
+	font-weight: bold;
+}
+
+div h2{
+	text-align: center;
+	margin: -3px;
+	
+}
+
+h2{ margin: 10px;}
+
+grr{ color: #0f0; font-weight: bold;}
+
+.btn-grid{
+	display: grid;
+	border: none;
+	width: 100%;
+	grid-template-columns: 50% 50%;
+	gap: 5px;
+	padding: 5px;
+	background: none;
+}
+
+popup p{
+	margin-top: 0px;
+}
+
+* {
+	box-sizing: border-box;
+	user-select: none;
+	font-size: 13.5px;
+}
+
+.popup-div{
+	position: fixed;
+	top: 0; left: 0;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.cont:active:not(.tshare){
+	border: .8px solid white;
+}
+
+.cont{
+	border-radius: 6px;
+	overflow:scroll;
+}
+
+.top-grid .cont{
+	border-radius: 3px;
+}
+
+.tshare h2{
+	margin: 0;
+}
+
+.tshare{
+	position: relative
+}
+
+.undo{
+	border-radius: 50%;
+	height: 50px;
+	width: 50px;
+	border: none;
+	position: fixed;
+	bottom: 10px;
+	left: 10px;
+	background: #000cc0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+h3{
+	margin: 3px;
+}
+
+.grid-cont{
+	all: initial;
+	display: grid;
+	grid-template-columns: 49% 49%;
+	grid-gap: 5px;
+}
+
+.top-grid{
+	all: initial;
+	display: grid;
+	gap: 1%;
+	grid-template-columns: 19% 60% 19%;
+}
+
+#tso{
+	margin: 0;
+	padding: 0;
+}
+
+.tshare{
+	font-weight: 400;
+	padding: 0px;
+}
+
+.tas{
+	font-weight: bold;
+	font-size: 1rem;
+}
+
+body{
+	padding: 3%;
+}
+
+.grid-cont .cont:not(h2){
+	color: #bbb
+}
+
+.nums, .cont h2{
+	font-weight: bold;
+	color: white;
+}
+
+.cont h2{ font-size: 1.2rem; }
+.nums{ text-align: center; font-size: 2.5rem;}
+
+.buyorsell{
+	font-size: 2rem;
+	text-align: center;
+	padding: 5px;
+	border: none;
+	box-sizing: border-box;
+}
+
+.buy{
+	right: 0; top: 0;
+	font-align: center;
+	border-radius: 0 0 0 3px;
+	border-right: .5px solid #222;
+}
+
+.buy:active, .buyactive{ 
+	background: #0c0;
+}
+
+.sell{
+	left: 0; top: 0;
+	font-align: center;
+	border-radius: 0 0 3px 0;
+	border-left: .5px solid #222;
+}
+
+.sell:active , .sellactive{ background: #f00}
+
+.buyorsell-div{
+	all: initial;
+	color: white;
+	display: grid;
+	grid-template-columns: 50% 50%;
+	padding: 0px;
+	border: none;
+	background: #333;
+	margin: -0.1px;
+	overflow: hidden;
+	
+}
+
+.total_slp{
+	padding: 3px;
+}
+
+.header{
+	all: initial;
+	position: absolute;
+	display: fixed;
+	top: 0;
+	left: 0;
+	z-index: 23;
+	background: #171717;
+	height: 40px;
+	width: 100%;
+}
+</style>
+</head>
+<body>
+<div class="header">
+
+</div>
+
+
+<div class="cont tshare">
+<rrr class="total_slp">
+<center><span class="tas">TOTAL SLP</span><br>
+<span class="nums" id="tso">0000</span></center>
+</rrr>
+<div class="buyorsell-div">
+<span 
+	class="material-icons buyorsell buy"
+	id="buy"
+	onclick="buysell('buy')
+	hahapop('buy')">
+add_shopping_cart
+</span>
+<span 
+	class="material-icons buyorsell sell"
+	id="sell"
+	onclick="buysell('sell')
+	hahapop('sell')">
+paid
+</span>
+</div>
+</div>
+
+<br>
+<div class="grid-cont">
+<div class="cont" onclick="hahapop('rod')">
+<p><h2>Rod</h2><br>
+Current SLP : <br><span class="nums" id="rod">0</span></p>
+<p><strong>Percentage</strong> : <span id="rod_perc">0%</span></p>
+<strong>SLP earned</strong> : <span id="rod_totals">0</span>
+(+<span id="rod_earnings">0%</span>)</p>
+</div>
+
+<div class="cont" onclick="hahapop('lance')">
+<p><h2>Lance</h2> <br>
+Current SLP : <br><span class="nums" id="lance">0</span></p>
+<p><strong>Percentage</strong> : <span id="lance_perc">0%</span></p>
+<strong>SLP earned</strong> : <span id="lance_totals">0</span>
+(+<span id="lance_earnings">0%</span>)</p>
+</div>
+
+<div class="cont" onclick="hahapop('daboi')">
+<p><h2>Daboi</h2><br>
+Current SLP : <br><span class="nums" id="daboi">0</span></p>
+<p><strong>Percentage</strong> : <span id="daboi_perc">0%</span></p>
+<strong>SLP earned</strong> : <span id="daboi_totals">0</span>
+(+<span id="daboi_earnings">0%</span>)</p>
+</div>
+
+</div>
+
+
+<div id="popup-div" class="popup-container show">
+<div id="popup" class="popup-div">
+<center>
+<p><grr>VALUE</grr> : <span id="popup_value">9999</span></p>
+<input id="popup_input" type="number"></input><br>
+<div class="btn-grid">
+<button id="popup_btn" class="" onclick="hahapop()">CONFIRM</button>
+<button onclick="hahapop()">CANCEL</button></div>
+</center>
+</div>
+</div>
+
+<button class="undo" onclick="">
+	<span class="material-icons">
+	settings
+	</span>
+</button>
+
+<script>
+let DOM = function(x){
+	return document.getElementById(x)
+},
+	$ = localStorage;
+
+
+var 
+	rod = {
+		first_slp: 0,
+		base_slp: 0,
+		percentage: 0
+	},
+	lance = {
+		first_slp: 0,
+		base_slp: 0,
+		percentage: 0
+	},
+	daboi = {
+		first_slp: 0,
+		base_slp: 0,
+		percentage: 0
+	},
+	total_shares_ot, tso = document.getElementById("tso"),
+	total_shares = 0,
+	pinput = DOM("popup_input"),
+	popup = DOM("popup"),
+	popup_con = DOM("popup-div"),
+	popup_otp = DOM("popup_input"),
+	popup_btn = DOM("popup_btn");
+
+function adcom(x) {
+   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+tso.innerHTML = adcom(total_shares);
+tso.addEventListener("input", function() {
+	if(localStorage.getItem("total_shares") !== null){
+	localStorage.setItem("total_shares", tso.innerHTML);
+	}
+	console.log(JSON.stringify(localStorage.getItem("total_shares")));
+}, false);
+
+function hahapop(x) {
+  
+  popup_con.classList.toggle("show");
+  
+  if(x == "shares"){
+		popup.innerHTML = `
+		<center>
+		<p><grr>Shares</grr> : <span id="popup_value">9999</span></p>
+		<input id="popup_input" type="number"></input><br>
+		<p><grr>Shares</grr> : <span id="popup_value2">9999</span></p>
+		<input id="popup_input2" type="number"></input><br>
+		<div class="btn-grid">
+		<button id="popup_btn" class="" onclick="hahapop();
+		tsf('shares');">CONFIRM</button>
+		<button onclick="hahapop()">CANCEL</button></div>
+		</center>
+		`;
+		DOM("popup_value").innerHTML = adcom(total_shares);
+  }
+  if(x == "rod"){
+		popup.innerHTML = `
+		<center>
+		<p><grr>Rod's Assets</grr> : <span id="popup_value">9999</span></p>
+		<input id="popup_input" type="number"></input><br>
+		<p><grr>Rod's First Assets</grr> : <span id="popup_value">9999</span></p>
+		<input id="popup_input2" type="number"></input><br>
+		<div class="btn-grid">
+		<button id="popup_btn" class="" onclick="hahapop();
+		tsf('rod');">CONFIRM</button>
+		<button onclick="hahapop()">CANCEL</button></div>
+		</center>
+		`;
+		DOM("popup_value").innerHTML = adcom(parseFloat(rod.base_slp).toFixed(2));
+  }
+  if(x == "lance"){
+		popup.innerHTML = `
+		<center>
+		<p><grr>Lance's Assets</grr> : <span id="popup_value">9999</span></p>
+		<input id="popup_input" type="number"></input><br>
+		<input id="popup_input" type="number"></input><br>
+		<p><grr>Lance's First Assets</grr> : <span id="popup_value">9999</span></p>
+		<input id="popup_input2" type="number"></input><br>
+		<div class="btn-grid">
+		<button id="popup_btn" class="" onclick="hahapop();
+		tsf('lance');">CONFIRM</button>
+		<button onclick="hahapop()">CANCEL</button></div>
+		</center>
+		`;
+		DOM("popup_value").innerHTML = adcom(parseFloat(lance.base_slp).toFixed(2));
+  }
+  if(x == "daboi"){
+  		popup.innerHTML = `
+  		<center>
+  		<p><grr>Daboi's Assets</grr> : <span id="popup_value">9999</span></p>
+  		<input id="popup_input" type="number"></input><br>
+  		<p><grr>Daboi's First Assets</grr> : <span id="popup_value">9999</span></p>
+  		<input id="popup_input2" type="number"></input><br>
+  		<div class="btn-grid">
+  		<button id="popup_btn" class="" onclick="hahapop();
+  		tsf('daboi');">CONFIRM</button>
+  		<button onclick="hahapop()">CANCEL</button></div>
+  		</center>
+  		`;
+  		DOM("popup_value").innerHTML = adcom(parseFloat(lance.base_slp).toFixed(2));
+  
+  }
+  if(x == "buy"){
+  		popup.innerHTML = `
+  		<center>
+  		<p><grr>Total Assets</grr> : <span id="popup_value">9999</span></p><br>
+  		<strong><p>SLP sold for</p></strong>
+  		<input id="popup_input" type="number"></input><br>
+  		<strong><p>Buying Asset for</p></strong>
+		<input id="popup_input2" type="number"></input><br>
+		<strong><p>Fees</p></strong>
+		<input id="popup_input3" type="number"></input><br>
+		<input id="popup_input4" type="number"></input><br>
+  		<div class="btn-grid">
+  		<button id="popup_btn" class="" onclick="hahapop();
+  		tsf('buy');">CONFIRM</button>
+  		<button onclick="hahapop()">CANCEL</button></div>
+  		</center>
+  		`;
+  		DOM("popup_value").innerHTML = adcom(total_shares);
+  }
+  if(x == "sell"){
+  		popup.innerHTML = `
+  		<center>
+  		<p><grr>Total Assets</grr> : <span id="popup_value">9999</span></p><br>
+  		<strong><p>Total SLP</p></strong>
+  		<input id="popup_input" type="number"></input><br>
+  		<div class="btn-grid">
+  		<button id="popup_btn" class="" onclick="hahapop();
+  		tsf('sell');">CONFIRM</button>
+  		<button onclick="hahapop()">CANCEL</button></div>
+  		</center>
+  		`;
+  		DOM("popup_value").innerHTML = adcom(total_shares);
+  }
+}
+
+function tsf(x){
+	if(DOM("popup_input").value === ""){
+		return
+	}
+	switch(x){
+		case "shares":
+		total_shares = DOM("popup_input").value;
+		break;
+		
+		case "rod":
+		rod.base_slp = DOM("popup_input").value;
+		rod.first_slp = DOM("popup_input2").value;
+		break;
+		
+		case "lance":
+		lance.base_slp = DOM("popup_input").value;
+		lance.first_slp = DOM("popup_input2").value;
+		break;
+		
+		case "daboi":
+		daboi.base_slp = DOM("popup_input").value;
+		daboi.first_slp = DOM("popup_input2").value;
+		break;
+		
+		case "buy":
+		let soldFor = DOM("popup_input").value,
+			buyFor = DOM("popup_input2").value,
+			gasFee = DOM("popup_input3").value,
+			gasFee2 = DOM("popup_input3").value,
+			totalGasFee = gasFee + gasFee2,
+			PHP = total_shares * soldFor,
+			SLPbought = PHP / buyFor;
+		total_shares = SLPbought - totalGasFee;
+		rod.base_slp = total_shares * (rod.percentage / 100);
+		lance.base_slp = total_shares * (lance.percentage / 100);
+		daboi.base_slp = total_shares * (daboi.percentage / 100);
+		break;
+		
+		case "sell":
+		let totalSLP = DOM("popup_input").value;
+		rod.base_slp = totalSLP * (rod.percentage / 100);
+		lance.base_slp = totalSLP * (lance.percentage / 100);
+		daboi.base_slp = totalSLP * (daboi.percentage / 100);
+		break;
+	}
+	save();
+	update();
+}
+
+function getpercent(x, y){
+	if(x == 0){
+		return 0
+	}
+	return x / y * 100
+}
+
+function update(){
+	let rodbs = parseInt(rod.base_slp),
+		lancebs = parseInt(lance.base_slp),
+		daboibs = parseInt(daboi.base_slp);
+		
+	total_shares = 
+		rodbs + lancebs + daboibs;
+
+
+	DOM("tso").innerHTML = adcom(total_shares);
+	DOM("rod").innerHTML = adcom(parseFloat(rod.base_slp).toFixed(2));
+	DOM("lance").innerHTML = adcom(parseFloat(lance.base_slp).toFixed(2));
+	DOM("daboi").innerHTML = adcom(parseFloat(daboi.base_slp).toFixed(2));
+	
+	let
+		rod_perc = getpercent(rod.base_slp, total_shares),
+		lance_perc = getpercent(lance.base_slp, total_shares),
+		daboi_perc = getpercent(daboi.base_slp, total_shares);
+	rod.percentage = rod_perc;
+	lance.percentage = lance_perc;
+	daboi.percentage = daboi_perc;
+	DOM("rod_perc").innerHTML = parseFloat(rod_perc).toFixed(2) + "%";
+	DOM("lance_perc").innerHTML = parseFloat(lance_perc).toFixed(2) + "%";
+	DOM("daboi_perc").innerHTML = parseFloat(daboi_perc).toFixed(2) + "%";
+}
+
+function load(){
+	if($.getItem("database-rod") == null){
+		return
+	}
+
+	let rodLoaded = $.getItem("database-rod"),
+		lanceLoaded = $.getItem("database-lance"),
+		daboiLoaded = $.getItem("database-daboi");
+		
+	rod.base_slp = rodLoaded;
+	lance.base_slp = lanceLoaded;
+	daboi.base_slp = daboiLoaded;
+	update();
+}	
+
+function save(){
+	$.setItem("database-rod", rod.base_slp);
+	$.setItem("database-lance", lance.base_slp);
+	$.setItem("database-daboi", daboi.base_slp);
+	$.setItem("database-rod-percent", rod.percentage);
+	$.setItem("database-lance-percent", lance.percentage);
+	$.setItem("database-daboi-percent", daboi.percentage);
+	$.setItem("database-rod-first-slp", rod.first_slp);
+	$.setItem("database-lance-first-slp", lance.first_slp);
+	$.setItem("database-daboi-first-slp", daboi.first_slp);
+}
+
+load();
+</script>
+
+<script>
+	/* ACTIVE SELECTORS FOR BUY AND SELL*/
+	let buy = DOM("buy"),
+		sell = DOM("sell");
+		
+	function buysell(x){
+		switch(x){
+		case "buy":
+			buy.classList.toggle("buyactive");
+		break;
+		case "sell":
+			sell.classList.toggle("sellactive");
+		break;
+		}
+	}
+</script>
+</body>
 </html>
