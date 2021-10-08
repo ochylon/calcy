@@ -149,7 +149,8 @@ popup p{
 
 .cont{
 	border-radius: 6px;
-	overflow:scroll;
+	overflow:hidden;
+	text-overflow: ellipsis;
 }
 
 .top-grid .cont{
@@ -199,6 +200,7 @@ h3{
 #tso{
 	margin: 0;
 	padding: 0;
+	text-overflow: ellipsis;
 }
 
 .tshare{
@@ -222,6 +224,7 @@ body{
 .nums, .cont h2{
 	font-weight: bold;
 	color: white;
+	text-overflow: ellipsis;
 }
 
 .cont h2{ font-size: 1.2rem; }
@@ -268,7 +271,7 @@ body{
 	
 }
 
-.total_slp{
+.total_ASSETS{
 	padding: 3px;
 }
 
@@ -292,8 +295,8 @@ body{
 
 
 <div class="cont tshare">
-<rrr class="total_slp">
-<center><span class="tas">TOTAL SLP</span><br>
+<rrr class="total_ASSETS">
+<center><span class="tas">TOTAL STOCKS</span><br>
 <span class="nums" id="tso">0000</span></center>
 </rrr>
 <div class="buyorsell-div">
@@ -318,25 +321,25 @@ paid
 <div class="grid-cont">
 <div class="cont" onclick="hahapop('rod')">
 <p><h2>Rod</h2><br>
-Current SLP : <br><span class="nums" id="rod">0</span></p>
+Current Stocks : <br><span class="nums" id="rod">0</span></p>
 <p><strong>Percentage</strong> : <span id="rod_perc">0%</span></p>
-<strong>SLP earned</strong> : <span id="rod_totals">0</span>
+<strong>Stocks earned</strong> : <span id="rod_totals">0</span>
 (+<span id="rod_earnings">0%</span>)</p>
 </div>
 
 <div class="cont" onclick="hahapop('lance')">
 <p><h2>Lance</h2> <br>
-Current SLP : <br><span class="nums" id="lance">0</span></p>
+Current Stocks : <br><span class="nums" id="lance">0</span></p>
 <p><strong>Percentage</strong> : <span id="lance_perc">0%</span></p>
-<strong>SLP earned</strong> : <span id="lance_totals">0</span>
+<strong>Stocks earned</strong> : <span id="lance_totals">0</span>
 (+<span id="lance_earnings">0%</span>)</p>
 </div>
 
 <div class="cont" onclick="hahapop('daboi')">
 <p><h2>Daboi</h2><br>
-Current SLP : <br><span class="nums" id="daboi">0</span></p>
+Current Stocks : <br><span class="nums" id="daboi">0</span></p>
 <p><strong>Percentage</strong> : <span id="daboi_perc">0%</span></p>
-<strong>SLP earned</strong> : <span id="daboi_totals">0</span>
+<strong>Stocks earned</strong> : <span id="daboi_totals">0</span>
 (+<span id="daboi_earnings">0%</span>)</p>
 </div>
 
@@ -370,18 +373,18 @@ let DOM = function(x){
 
 var 
 	rod = {
-		first_slp: 0,
-		base_slp: 0,
+		first_ASSETS: 0,
+		base_ASSETS: 0,
 		percentage: 0
 	},
 	lance = {
-		first_slp: 0,
-		base_slp: 0,
+		first_ASSETS: 0,
+		base_ASSETS: 0,
 		percentage: 0
 	},
 	daboi = {
-		first_slp: 0,
-		base_slp: 0,
+		first_ASSETS: 0,
+		base_ASSETS: 0,
 		percentage: 0
 	},
 	total_shares_ot, tso = document.getElementById("tso"),
@@ -426,9 +429,9 @@ function hahapop(x) {
   if(x == "rod"){
 		popup.innerHTML = `
 		<center>
-		<p><grr>Rod's Assets</grr> : <span id="popup_value">9999</span></p>
+		<p><grr>Rod's Stocks</grr> : <span id="popup_value">9999</span></p>
 		<input id="popup_input" type="number"></input><br>
-		<p><grr>Rod's First Assets</grr> : <span id="popup_value">9999</span></p>
+		<p><grr>Rod's Initial Stocks</grr> : <span id="popup_value">9999</span></p>
 		<input id="popup_input2" type="number"></input><br>
 		<div class="btn-grid">
 		<button id="popup_btn" class="" onclick="hahapop();
@@ -436,14 +439,15 @@ function hahapop(x) {
 		<button onclick="hahapop()">CANCEL</button></div>
 		</center>
 		`;
-		DOM("popup_value").innerHTML = adcom(parseFloat(rod.base_slp).toFixed(2));
+		DOM("popup_value").innerHTML = adcom(parseFloat(rod.base_ASSETS).toFixed(2));
+		DOM("popup_input").value = rod.base_ASSETS;
   }
   if(x == "lance"){
 		popup.innerHTML = `
 		<center>
-		<p><grr>Lance's Assets</grr> : <span id="popup_value">9999</span></p>
+		<p><grr>Lance's Stocks</grr> : <span id="popup_value">9999</span></p>
 		<input id="popup_input" type="number"></input><br>
-		<p><grr>Lance's First Assets</grr> : <span id="popup_value">9999</span></p>
+		<p><grr>Lance's Initial Stocks</grr> : <span id="popup_value">9999</span></p>
 		<input id="popup_input2" type="number"></input><br>
 		<div class="btn-grid">
 		<button id="popup_btn" class="" onclick="hahapop();
@@ -451,14 +455,15 @@ function hahapop(x) {
 		<button onclick="hahapop()">CANCEL</button></div>
 		</center>
 		`;
-		DOM("popup_value").innerHTML = adcom(parseFloat(lance.base_slp).toFixed(2));
+		DOM("popup_value").innerHTML = adcom(parseFloat(lance.base_ASSETS).toFixed(2));
+		DOM("popup_input").value = lance.base_ASSETS;
   }
   if(x == "daboi"){
   		popup.innerHTML = `
   		<center>
-  		<p><grr>Daboi's Assets</grr> : <span id="popup_value">9999</span></p>
+  		<p><grr>Daboi's Stocks</grr> : <span id="popup_value">9999</span></p>
   		<input id="popup_input" type="number"></input><br>
-  		<p><grr>Daboi's First Assets</grr> : <span id="popup_value">9999</span></p>
+  		<p><grr>Daboi's Initial Stocks</grr> : <span id="popup_value">9999</span></p>
   		<input id="popup_input2" type="number"></input><br>
   		<div class="btn-grid">
   		<button id="popup_btn" class="" onclick="hahapop();
@@ -466,14 +471,14 @@ function hahapop(x) {
   		<button onclick="hahapop()">CANCEL</button></div>
   		</center>
   		`;
-  		DOM("popup_value").innerHTML = adcom(parseFloat(lance.base_slp).toFixed(2));
+  		DOM("popup_value").innerHTML = adcom(parseFloat(lance.base_ASSETS).toFixed(2));
   
   }
   if(x == "buy"){
   		popup.innerHTML = `
   		<center>
   		<p><grr>Total Assets</grr> : <span id="popup_value">9999</span></p><br>
-  		<strong><p>SLP sold for</p></strong>
+  		<strong><p>ASSETS sold for</p></strong>
   		<input id="popup_input" type="number"></input><br>
   		<strong><p>Buying Asset for</p></strong>
 		<input id="popup_input2" type="number"></input><br>
@@ -492,7 +497,7 @@ function hahapop(x) {
   		popup.innerHTML = `
   		<center>
   		<p><grr>Total Assets</grr> : <span id="popup_value">9999</span></p><br>
-  		<strong><p>Total SLP</p></strong>
+  		<strong><p>Total ASSETS</p></strong>
   		<input id="popup_input" type="number"></input><br>
   		<div class="btn-grid">
   		<button id="popup_btn" class="" onclick="hahapop();
@@ -514,18 +519,18 @@ function tsf(x){
 		break;
 		
 		case "rod":
-		rod.base_slp = DOM("popup_input").value;
-		rod.first_slp = DOM("popup_input2").value;
+		rod.base_ASSETS = DOM("popup_input").value;
+		rod.first_ASSETS = DOM("popup_input2").value;
 		break;
 		
 		case "lance":
-		lance.base_slp = DOM("popup_input").value;
-		lance.first_slp = DOM("popup_input2").value;
+		lance.base_ASSETS = DOM("popup_input").value;
+		lance.first_ASSETS = DOM("popup_input2").value;
 		break;
 		
 		case "daboi":
-		daboi.base_slp = DOM("popup_input").value;
-		daboi.first_slp = DOM("popup_input2").value;
+		daboi.base_ASSETS = DOM("popup_input").value;
+		daboi.first_ASSETS = DOM("popup_input2").value;
 		break;
 		
 		case "buy":
@@ -535,18 +540,32 @@ function tsf(x){
 			gasFee2 = DOM("popup_input3").value,
 			totalGasFee = gasFee + gasFee2,
 			PHP = total_shares * soldFor,
-			SLPbought = PHP / buyFor;
-		total_shares = SLPbought - totalGasFee;
-		rod.base_slp = total_shares * (rod.percentage / 100);
-		lance.base_slp = total_shares * (lance.percentage / 100);
-		daboi.base_slp = total_shares * (daboi.percentage / 100);
+			ASSETSbought = PHP / buyFor;
+		total_shares = ASSETSbought - totalGasFee;
+		rod.base_ASSETS = total_shares * (rod.percentage / 100);
+		lance.base_ASSETS = total_shares * (lance.percentage / 100);
+		daboi.base_ASSETS = total_shares * (daboi.percentage / 100);
 		break;
 		
 		case "sell":
-		let totalSLP = DOM("popup_input").value;
-		rod.base_slp = totalSLP * (rod.percentage / 100);
-		lance.base_slp = totalSLP * (lance.percentage / 100);
-		daboi.base_slp = totalSLP * (daboi.percentage / 100);
+		console.log(
+		rod.percentage,
+		lance.percentage,
+		daboi.percentage
+		)
+		let totalASSETS = DOM("popup_input").value;
+		rod.base_ASSETS = totalASSETS * rod.percentage / 100;
+		lance.base_ASSETS = totalASSETS * lance.percentage / 100;
+		daboi.base_ASSETS = totalASSETS * (daboi.percentage / 100);
+		console.log(
+		rod.percentage,
+		lance.percentage,
+		daboi.percentage
+		)
+		save();
+		total_shares = totalASSETS;
+		update(69);
+		return
 		break;
 	}
 	save();
@@ -557,33 +576,35 @@ function getpercent(x, y){
 	if(x == 0){
 		return 0
 	}
+	console.log(x, y)
 	return x / y * 100
 }
 
-function update(){
-	let rodbs = parseInt(rod.base_slp),
-		lancebs = parseInt(lance.base_slp),
-		daboibs = parseInt(daboi.base_slp);
+function update(x){
+	let rodbs = Number(rod.base_ASSETS),
+		lancebs = Number(lance.base_ASSETS),
+		daboibs = Number(daboi.base_ASSETS);
 		
+	if(x == null){
 	total_shares = 
 		rodbs + lancebs + daboibs;
+	}
 
-
-	DOM("tso").innerHTML = adcom(total_shares);
-	DOM("rod").innerHTML = adcom(parseFloat(rod.base_slp).toFixed(2));
-	DOM("lance").innerHTML = adcom(parseFloat(lance.base_slp).toFixed(2));
-	DOM("daboi").innerHTML = adcom(parseFloat(daboi.base_slp).toFixed(2));
+	DOM("tso").innerHTML = total_shares;
+	DOM("rod").innerHTML = adcom(rod.base_ASSETS);
+	DOM("lance").innerHTML = adcom(lance.base_ASSETS);
+	DOM("daboi").innerHTML = adcom(daboi.base_ASSETS);
 	
 	let
-		rod_perc = getpercent(rod.base_slp, total_shares),
-		lance_perc = getpercent(lance.base_slp, total_shares),
-		daboi_perc = getpercent(daboi.base_slp, total_shares);
+		rod_perc = getpercent(rod.base_ASSETS, total_shares),
+		lance_perc = getpercent(lance.base_ASSETS, total_shares),
+		daboi_perc = getpercent(daboi.base_ASSETS, total_shares);
 	rod.percentage = rod_perc;
 	lance.percentage = lance_perc;
 	daboi.percentage = daboi_perc;
-	DOM("rod_perc").innerHTML = parseFloat(rod_perc).toFixed(2) + "%";
-	DOM("lance_perc").innerHTML = parseFloat(lance_perc).toFixed(2) + "%";
-	DOM("daboi_perc").innerHTML = parseFloat(daboi_perc).toFixed(2) + "%";
+	DOM("rod_perc").innerHTML = rod_perc + "%";
+	DOM("lance_perc").innerHTML = lance_perc + "%";
+	DOM("daboi_perc").innerHTML = daboi_perc + "%";
 }
 
 function load(){
@@ -595,22 +616,22 @@ function load(){
 		lanceLoaded = $.getItem("database-lance"),
 		daboiLoaded = $.getItem("database-daboi");
 		
-	rod.base_slp = rodLoaded;
-	lance.base_slp = lanceLoaded;
-	daboi.base_slp = daboiLoaded;
+	rod.base_ASSETS = rodLoaded;
+	lance.base_ASSETS = lanceLoaded;
+	daboi.base_ASSETS = daboiLoaded;
 	update();
 }	
 
 function save(){
-	$.setItem("database-rod", rod.base_slp);
-	$.setItem("database-lance", lance.base_slp);
-	$.setItem("database-daboi", daboi.base_slp);
+	$.setItem("database-rod", rod.base_ASSETS);
+	$.setItem("database-lance", lance.base_ASSETS);
+	$.setItem("database-daboi", daboi.base_ASSETS);
 	$.setItem("database-rod-percent", rod.percentage);
 	$.setItem("database-lance-percent", lance.percentage);
 	$.setItem("database-daboi-percent", daboi.percentage);
-	$.setItem("database-rod-first-slp", rod.first_slp);
-	$.setItem("database-lance-first-slp", lance.first_slp);
-	$.setItem("database-daboi-first-slp", daboi.first_slp);
+	$.setItem("database-rod-first-ASSETS", rod.first_ASSETS);
+	$.setItem("database-lance-first-ASSETS", lance.first_ASSETS);
+	$.setItem("database-daboi-first-ASSETS", daboi.first_ASSETS);
 }
 
 load();
